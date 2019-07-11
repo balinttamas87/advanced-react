@@ -46,3 +46,4 @@ const Home = props => (
 );
 
 export default Home;
+export { ALL_ITEMS_QUERY };
