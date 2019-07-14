@@ -3,6 +3,7 @@ import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import Error from "./ErrorMessage";
 import Form from "./styles/Form";
+import { CURRENT_USER_QUERY } from "./User";
 
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION(
@@ -17,7 +18,7 @@ const SIGNUP_MUTATION = gql`
     }
   }
 `;
-class Singup extends Component {
+class Signup extends Component {
   state = {
     email: "",
     name: "",
@@ -30,7 +31,11 @@ class Singup extends Component {
   };
   render() {
     return (
-      <Mutation mutation={SIGNUP_MUTATION} variables={this.state}>
+      <Mutation
+        mutation={SIGNUP_MUTATION}
+        variables={this.state}
+        refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+      >
         {(signup, { loading, error }) => {
           return (
             <Form
@@ -82,7 +87,7 @@ class Singup extends Component {
                   />
                 </label>
 
-                <button type="submit">Sign Up</button>
+                <button type="submit">Sign In</button>
               </fieldset>
             </Form>
           );
@@ -92,4 +97,4 @@ class Singup extends Component {
   }
 }
 
-export default Singup;
+export default Signup;
